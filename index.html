@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Frank Deezua Barilugbene — Technology Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0D1B2A;
+    --gold: #B8975A;
+    --gold-light: #D4B07A;
+    --off-white: #F7F4EF;
+    --warm-gray: #E8E4DC;
+    --text-muted: #6B6460;
+    --text-body: #2C2420;
+    --font-serif: 'Lora', Georgia, serif;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--off-white); color: var(--text-body); font-size: 16px; line-height: 1.7; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,244,239,0.93); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--warm-gray);
+    padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px;
+  }
+  .nav-logo { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--navy); text-decoration: none; }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--navy); margin: 5px 0; }
+
+  #about { min-height: 100vh; display: flex; align-items: center; padding: 100px 10% 80px; background: var(--navy); position: relative; overflow: hidden; }
+  #about::before { content: ''; position: absolute; top: -200px; right: -100px; width: 600px; height: 600px; border-radius: 50%; border: 1px solid rgba(184,151,90,0.12); }
+  #about::after { content: ''; position: absolute; bottom: -120px; left: 20%; width: 420px; height: 420px; border-radius: 50%; border: 1px solid rgba(184,151,90,0.07); }
+  .hero-inner { max-width: 760px; position: relative; z-index: 1; }
+  .hero-label { display: inline-block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,151,90,0.4); padding: 5px 14px; border-radius: 2px; margin-bottom: 2rem; }
+  .hero-name { font-family: var(--font-serif); font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 400; color: #fff; line-height: 1.15; margin-bottom: 1.5rem; }
+  .hero-name em { color: var(--gold-light); font-style: italic; }
+  .hero-desc { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.62); max-width: 580px; margin-bottom: 1.75rem; line-height: 1.85; }
+  .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .hero-stat-val { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 600; color: var(--gold-light); line-height: 1; }
+  .hero-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 4px; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .hero-cta { display: inline-block; background: var(--gold); color: var(--navy); text-decoration: none; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.06em; padding: 13px 30px; border-radius: 2px; transition: background 0.2s; }
+  .hero-cta:hover { background: var(--gold-light); }
+  .hero-cta-ghost { display: inline-block; background: transparent; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 400; font-size: 0.85rem; padding: 13px 30px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s; }
+  .hero-cta-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+  .hero-contacts { margin-top: 2.5rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+  .hero-contacts a, .hero-contacts span { font-size: 0.78rem; color: rgba(255,255,255,0.4); text-decoration: none; }
+  .hero-contacts a:hover { color: var(--gold-light); }
+
+  section { padding: 90px 10%; }
+  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .section-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 400; color: var(--navy); line-height: 1.25; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--warm-gray); }
+
+  #skills { background: #fff; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--off-white); border: 1px solid var(--warm-gray); border-radius: 4px; padding: 1.5rem 1.75rem; transition: border-color 0.2s, transform 0.2s; }
+  .skill-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .skill-card-icon { width: 34px; height: 34px; background: var(--navy); border-radius: 3px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+  .skill-card-icon svg { width: 17px; height: 17px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .skill-card h3 { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.75rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag { font-size: 0.7rem; font-weight: 500; background: var(--warm-gray); color: var(--text-muted); padding: 3px 10px; border-radius: 2px; }
+
+  .certs-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--warm-gray); }
+  .cert-badge { display: flex; align-items: center; gap: 8px; background: var(--navy); color: rgba(255,255,255,0.82); font-size: 0.74rem; padding: 7px 14px; border-radius: 3px; }
+  .cert-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  #projects { background: var(--off-white); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .project-card { background: #fff; border: 1px solid var(--warm-gray); border-radius: 4px; padding: 2rem; display: flex; flex-direction: column; transition: box-shadow 0.2s, transform 0.2s; }
+  .project-card:hover { box-shadow: 0 8px 32px rgba(13,27,42,0.07); transform: translateY(-3px); }
+  .project-type { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.65rem; }
+  .project-card h3 { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.75rem; line-height: 1.35; }
+  .project-card p { font-size: 0.88rem; color: var(--text-muted); flex: 1; margin-bottom: 1.25rem; line-height: 1.75; }
+  .project-highlights { list-style: none; margin-bottom: 1.25rem; }
+  .project-highlights li { font-size: 0.82rem; color: var(--text-muted); padding: 3px 0 3px 14px; position: relative; line-height: 1.6; }
+  .project-highlights li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 1px; background: var(--gold); }
+  .project-footer { display: flex; align-items: flex-start; justify-content: space-between; border-top: 1px solid var(--warm-gray); padding-top: 1rem; margin-top: auto; gap: 0.5rem; flex-wrap: wrap; }
+  .project-tech { font-size: 0.72rem; color: var(--text-muted); }
+  .project-impact { font-size: 0.78rem; font-weight: 500; color: var(--navy); text-align: right; }
+
+  #experience { background: #fff; }
+  .timeline { position: relative; padding-left: 1.75rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--warm-gray); }
+  .timeline-item { margin-bottom: 3.5rem; position: relative; }
+  .timeline-dot { position: absolute; left: -1.75rem; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); transform: translateX(-4px); }
+  .timeline-period { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; }
+  .timeline-role { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; line-height: 1.35; }
+  .timeline-company { font-size: 0.85rem; font-weight: 500; color: var(--gold); margin-bottom: 1rem; }
+  .timeline-bullets { list-style: none; }
+  .timeline-bullets li { font-size: 0.88rem; color: var(--text-muted); padding: 4px 0 4px 16px; position: relative; line-height: 1.7; max-width: 720px; }
+  .timeline-bullets li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 1px; background: var(--gold); }
+  .impact-pill { display: inline-block; background: rgba(184,151,90,0.1); color: #8a6c30; font-size: 0.7rem; font-weight: 500; padding: 2px 9px; border-radius: 20px; margin-left: 6px; vertical-align: middle; }
+
+  #education { background: var(--off-white); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .edu-card { background: #fff; border: 1px solid var(--warm-gray); border-radius: 4px; padding: 1.75rem; }
+  .edu-card-type { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .edu-card h3 { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; line-height: 1.35; }
+  .edu-institution { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .edu-period { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.04em; }
+  .edu-note { font-size: 0.78rem; color: var(--gold); margin-top: 0.6rem; font-style: italic; }
+
+  #contact { background: var(--navy); }
+  #contact .section-label { color: var(--gold-light); }
+  #contact .section-title { color: #fff; border-bottom-color: rgba(255,255,255,0.1); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-intro { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.85; margin-bottom: 2rem; }
+  .contact-item { display: flex; flex-direction: column; margin-bottom: 1.25rem; }
+  .contact-item-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 0.2rem; }
+  .contact-item-value { font-size: 0.9rem; color: rgba(255,255,255,0.8); text-decoration: none; }
+  .contact-item-value:hover { color: var(--gold-light); }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input, .contact-form textarea { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; color: #fff; font-family: var(--font-sans); font-size: 0.88rem; padding: 12px 16px; width: 100%; outline: none; transition: border-color 0.2s; }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.28); }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+  .contact-form textarea { resize: vertical; min-height: 130px; }
+  .form-btn { background: var(--gold); color: var(--navy); border: none; border-radius: 2px; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; padding: 13px 30px; cursor: pointer; align-self: flex-start; transition: background 0.2s; }
+  .form-btn:hover { background: var(--gold-light); }
+  .form-success { display: none; color: var(--gold-light); font-size: 0.88rem; padding: 10px 0; }
+
+  footer { background: #070E16; padding: 2rem 10%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  footer p { font-size: 0.75rem; color: rgba(255,255,255,0.22); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 6%; }
+    .nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--off-white); flex-direction: column; align-items: center; gap: 0; border-bottom: 1px solid var(--warm-gray); }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; text-align: center; }
+    .nav-links a { display: block; padding: 1rem 0; border-bottom: 1px solid var(--warm-gray); }
+    .nav-toggle { display: block; }
+    #about { padding: 100px 6% 70px; }
+    section { padding: 70px 6%; }
+    .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { gap: 1.75rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#about" class="nav-logo">Frank Deezua <span>·</span> Barilugbene</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="about">
+  <div class="hero-inner">
+    <span class="hero-label">Senior Technical Business Analyst</span>
+    <h1 class="hero-name">Frank Deezua<br><em>Barilugbene</em></h1>
+    <p class="hero-desc">Delivering data-driven and integration-led solutions across Energy and Financial Services. I translate complex business requirements into clear technical specifications — bridging product, engineering, and senior stakeholder worlds in Agile environments.</p>
+    <div class="hero-stats">
+      <div><div class="hero-stat-val">3+</div><div class="hero-stat-label">Years at Deloitte</div></div>
+      <div><div class="hero-stat-val">55%</div><div class="hero-stat-label">Efficiency gain delivered</div></div>
+      <div><div class="hero-stat-val">$500k+</div><div class="hero-stat-label">Cost savings generated</div></div>
+      <div><div class="hero-stat-val">4</div><div class="hero-stat-label">Cloud certifications</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="hero-cta">View My Work</a>
+      <a href="#contact" class="hero-cta-ghost">Get In Touch</a>
+    </div>
+    <div class="hero-contacts">
+      <a href="mailto:deezuafrank@gmail.com">deezuafrank@gmail.com</a>
+      <a href="tel:+447349135883">+44 7349 135 883</a>
+      <a href="https://www.linkedin.com/in/frank-b-ba2767111" target="_blank">LinkedIn</a>
+      <span>Aberdeen, Scotland, UK</span>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-label">Expertise</p>
+  <h2 class="section-title">Skills &amp; Capabilities</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="M9 12h6M9 16h4"/></svg></div>
+      <h3>Business Analysis</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Requirements Elicitation</span><span class="skill-tag">User Stories</span><span class="skill-tag">Acceptance Criteria</span><span class="skill-tag">Process Mapping</span><span class="skill-tag">UAT</span><span class="skill-tag">Use Cases</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+      <h3>Data &amp; Analytics</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL</span><span class="skill-tag">Power BI</span><span class="skill-tag">Data Flows</span><span class="skill-tag">Data Schemas</span><span class="skill-tag">Python</span><span class="skill-tag">Reporting</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <h3>System Integration</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">REST APIs</span><span class="skill-tag">API Contracts</span><span class="skill-tag">Microservices</span><span class="skill-tag">Salesforce CRM</span><span class="skill-tag">Postman</span><span class="skill-tag">SAP</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>Agile Delivery</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Scrum</span><span class="skill-tag">Backlog Management</span><span class="skill-tag">Sprint Planning</span><span class="skill-tag">SDLC</span><span class="skill-tag">Jira</span><span class="skill-tag">Confluence</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <h3>Cloud &amp; Microsoft 365</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">GCP</span><span class="skill-tag">AWS</span><span class="skill-tag">Azure AD</span><span class="skill-tag">SharePoint Online</span><span class="skill-tag">Power Automate</span><span class="skill-tag">Teams</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h3>Stakeholder Engagement</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Workshop Facilitation</span><span class="skill-tag">Senior Stakeholders</span><span class="skill-tag">Change Control</span><span class="skill-tag">Risk Management</span><span class="skill-tag">Governance</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="certs-row">
+    <div class="cert-badge"><span class="cert-dot"></span>Salesforce Certified Administrator</div>
+    <div class="cert-badge"><span class="cert-dot"></span>GCP Certified Cloud Engineer</div>
+    <div class="cert-badge"><span class="cert-dot"></span>AWS Certified Cloud Practitioner</div>
+    <div class="cert-badge"><span class="cert-dot"></span>Microsoft 365: Collaboration &amp; Communications Engineer</div>
+  </div>
+</section>
+
+<section id="projects">
+  <p class="section-label">Case Studies</p>
+  <h2 class="section-title">Projects &amp; Key Deliverables</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <p class="project-type">Energy Sector · Deloitte</p>
+      <h3>Salesforce CRM Integration — National Gas Processing Company</h3>
+      <p>Led requirements for the full integration of Salesforce CRM with core enterprise systems, defining data flows, REST API contracts, validation rules, and system interfaces across a multi-team programme.</p>
+      <ul class="project-highlights">
+        <li>Defined API contracts and validated data schemas end-to-end</li>
+        <li>Collaborated with engineering on microservices impact analysis</li>
+        <li>Managed delivery artefacts in Jira and Confluence</li>
+      </ul>
+      <div class="project-footer">
+        <span class="project-tech">Salesforce · REST APIs · SQL · Power BI</span>
+        <span class="project-impact">55% efficiency gain</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-type">Financial Services · Deloitte</p>
+      <h3>Automation &amp; Data Programme — Tier 1 Banks</h3>
+      <p>Delivered automation and data-enabled solutions for two major Tier 1 banks, reducing process cycle times and generating significant operational cost savings across regulated banking environments.</p>
+      <ul class="project-highlights">
+        <li>Elicited functional and non-functional requirements end-to-end</li>
+        <li>Supported backlog refinement, sprint planning, and UAT</li>
+        <li>Data analysis with SQL and Power BI for benefits realisation</li>
+      </ul>
+      <div class="project-footer">
+        <span class="project-tech">Agile · SQL · Power BI · Jira</span>
+        <span class="project-impact">40% cycle time reduction · $500k+ saved</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-type">AI Governance · Financial Services</p>
+      <h3>AI Governance Framework — Tier 1 Financial Institution</h3>
+      <p>Contributed to the development of an enterprise AI governance framework, supporting ethical and controlled adoption of data-driven and AI technologies within a highly regulated environment.</p>
+      <ul class="project-highlights">
+        <li>Mapped AI use cases against regulatory and ethical standards</li>
+        <li>Documented governance controls and risk identification</li>
+        <li>Supported cross-functional alignment on AI policy</li>
+      </ul>
+      <div class="project-footer">
+        <span class="project-tech">AI Governance · Compliance · Documentation</span>
+        <span class="project-impact">Enterprise-wide framework</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <p class="project-type">Operational Analytics · Halliburton</p>
+      <h3>Real-Time Equipment Tracking Tool — Wireline &amp; Perforating</h3>
+      <p>Designed and delivered a data-driven operational tracking tool integrating SAP data with Microsoft Lists and Power BI dashboards, enabling real-time equipment visibility for field teams.</p>
+      <ul class="project-highlights">
+        <li>Automated data collection via Power Automate and Excel VBA</li>
+        <li>Validated requirements with operational stakeholders</li>
+        <li>Full traceability and documentation in a regulated environment</li>
+      </ul>
+      <div class="project-footer">
+        <span class="project-tech">SAP · Power BI · Power Automate · Excel VBA</span>
+        <span class="project-impact">80% planning efficiency gain</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experience">
+  <p class="section-label">Career</p>
+  <h2 class="section-title">Work Experience</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-period">Jun 2025 – Aug 2025</p>
+      <p class="timeline-role">Business Improvement Analyst (Internship)</p>
+      <p class="timeline-company">Halliburton Energy Services, Aberdeen UK — Wireline &amp; Perforating PSL</p>
+      <ul class="timeline-bullets">
+        <li>Built a real-time operational tracking tool integrating SAP data with Microsoft Lists and Power BI dashboards.<span class="impact-pill">80% efficiency gain</span></li>
+        <li>Analysed operational workflows and data sources to define reporting requirements for field and maintenance teams.</li>
+        <li>Automated data collection and reporting using Power Automate and Excel VBA.</li>
+        <li>Ensured appropriate documentation, traceability, and risk management across all deliverables.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-period">Jul 2022 – Jan 2025</p>
+      <p class="timeline-role">Senior Technology Consultant — Technical Business Analyst (AI, Data &amp; CRM Integration)</p>
+      <p class="timeline-company">Deloitte — Energy &amp; Financial Services</p>
+      <ul class="timeline-bullets">
+        <li>Lead Technical BA on organisation-wide, multi-team data, automation, and system integration programmes.</li>
+        <li>Led Salesforce CRM integration for a national gas processing company — defining REST API contracts, data flows, and validation rules.<span class="impact-pill">55% efficiency gain</span></li>
+        <li>Delivered automation solutions reducing process cycle times by 40% and generating $500,000+ in savings across two Tier 1 banks.<span class="impact-pill">$500k+ saved</span></li>
+        <li>Contributed to an AI governance framework for a major financial institution, supporting ethical AI adoption.</li>
+        <li>Conducted data analysis with SQL and Power BI to support process redesign and benefits realisation.</li>
+        <li>Managed delivery artefacts in Jira and Confluence, ensuring full requirements traceability throughout the SDLC.</li>
+        <li>Facilitated stakeholder workshops and design sessions across business and technical teams in regulated environments.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-period">Sept 2020 – Jun 2022</p>
+      <p class="timeline-role">Microsoft 365 Enterprise Technical Support Engineer — Level 2</p>
+      <p class="timeline-company">TeKnowledge</p>
+      <ul class="timeline-bullets">
+        <li>Provided enterprise Microsoft 365 support across Exchange Online, SharePoint, Teams, and Azure Active Directory for businesses with 50+ licences.</li>
+        <li>Led complex migrations from Skype for Business to Teams and SharePoint On-Premises to Online.</li>
+        <li>Acted as Point of Contact (POC) for colleague escalations, consistently exceeding KPI targets.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-period">Jul 2019 – May 2020</p>
+      <p class="timeline-role">Graduate Internship</p>
+      <p class="timeline-company">International Energy Services Limited</p>
+      <ul class="timeline-bullets">
+        <li>Supported FEED studies and contributed to technical documentation, specifications, and design assurance activities.</li>
+        <li>Built foundations in structured documentation, requirements accuracy, and stakeholder collaboration.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="education">
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education &amp; Credentials</h2>
+  <div class="edu-grid">
+
+    <div class="edu-card">
+      <p class="edu-card-type">Postgraduate</p>
+      <h3>MSc (Eng) Process Safety Engineering</h3>
+      <p class="edu-institution">University of Aberdeen</p>
+      <p class="edu-period">Jan 2025 – Jan 2026</p>
+      <p class="edu-note">Commendation · Shell SPDC Fully Funded Scholarship Recipient</p>
+    </div>
+
+    <div class="edu-card">
+      <p class="edu-card-type">Undergraduate</p>
+      <h3>B-Tech Petroleum Engineering</h3>
+      <p class="edu-institution">Rivers State University</p>
+      <p class="edu-period">Sept 2013 – Sept 2018</p>
+      <p class="edu-note">Second Class Honours — Upper Division (2:1)</p>
+    </div>
+
+    <div class="edu-card">
+      <p class="edu-card-type">Certifications</p>
+      <h3>Cloud &amp; Platform Certifications</h3>
+      <p class="edu-institution">Salesforce · Google · Amazon · Microsoft</p>
+      <p class="edu-period">Active</p>
+      <p class="edu-note">Salesforce Admin · GCP Cloud Engineer · AWS Practitioner · Microsoft 365 Engineer</p>
+    </div>
+
+    <div class="edu-card">
+      <p class="edu-card-type">Volunteer &amp; Leadership</p>
+      <h3>Secretary, SPE Aberdeen Society</h3>
+      <p class="edu-institution">University of Aberdeen</p>
+      <p class="edu-period">Sept 2025 – May 2026</p>
+      <p class="edu-note">Also: Postgrad Course Rep · Deloitte SME Business Clinic · NDLEA Peer Educator</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label">Let's Connect</p>
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-layout">
+    <div>
+      <p class="contact-intro">Open to consulting engagements, BA and integration roles, and collaborations across data-driven delivery, AI governance, and regulated sector transformation. Based in Aberdeen, UK — available for hybrid or remote work.</p>
+      <div class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <a href="mailto:deezuafrank@gmail.com" class="contact-item-value">deezuafrank@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <a href="tel:+447349135883" class="contact-item-value">+44 7349 135 883</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/frank-b-ba2767111" target="_blank" class="contact-item-value">linkedin.com/in/frank-b-ba2767111</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Location</span>
+        <span class="contact-item-value">Aberdeen, Scotland, UK</span>
+      </div>
+    </div>
+    <div>
+      <form
+  action="https://formspree.io/f/xgopokbr"
+  method="POST">
+        <input type="text" placeholder="Your name" required />
+        <input type="email" placeholder="Your email address" required />
+        <input type="text" placeholder="Subject" />
+        <textarea placeholder="Your message"></textarea>
+        <button type="submit" class="form-btn">Send Message</button>
+        <p class="form-success" id="formSuccess">Thanks for reaching out — I'll be in touch soon.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Frank Deezua Barilugbene. All rights reserved.</p>
+  <p>Aberdeen, Scotland, UK</p>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('formSuccess').style.display = 'block';
+    this.reset();
+    setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
+  });
+  const navAs = document.querySelectorAll('.nav-links a');
+  const sects = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sects.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    navAs.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--navy)' : ''; });
+  });
+</script>
+</body>
+</html>
