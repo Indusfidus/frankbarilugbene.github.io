@@ -502,7 +502,7 @@
 
   // ── EmailJS contact form ──
   // Replace the three placeholder values below with your own from emailjs.com
-  emailjs.init('YOUR_PUBLIC_KEY');
+  emailjs.init('iV3JGX9BjnZMDDxPV');
 
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -518,7 +518,7 @@
       message:    this.querySelector('textarea').value,
     };
 
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params)
+    emailjs.send('service_kw6nasi', 'template_knxz4bw', params)
       .then(function() {
         const msg = document.getElementById('formSuccess');
         msg.textContent = 'Message sent! I’ll be in touch soon.';
